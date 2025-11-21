@@ -9,159 +9,223 @@ class OnBoardingV2Screen extends StatefulWidget {
 }
 
 class _OnBoardingV2ScreenState extends State<OnBoardingV2Screen> {
-  @override
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
 
-  /// ------------------------------
-  /// Rawwaan Onboarding Template
-  /// ------------------------------
-  /// Description:
-  /// This is a reusable onboarding screen template for Rawwaan apps.
-  /// Features include:
-  /// - App logo with title
-  /// - Network image with loading & error handling
-  /// - Headline & subtitle text
-  /// - Next & Skip buttons
-  /// Designed with clean UI and Google Fonts for typography.
-  /// ------------------------------
-  ///
+  // Define Brand Colors
+  final Color _limeGreen = const Color(0xFFBFFF60);
+  final Color _forestGreen = Colors.green.shade900;
+
+  // Dummy Data for the slider
+  final List<Map<String, String>> _onboardingData = [
+    {
+      "title": "Team Up For Success",
+      "subtitle":
+          "Great things in business are never done by one person. They're done by a team of people.",
+      "image":
+          "https://img.freepik.com/free-vector/flat-creativity-concept-illustration_52683-64279.jpg",
+    },
+    {
+      "title": "Work Smarter",
+      "subtitle":
+          "Leverage tools that help you organize your workflow and boost productivity effortlessly.",
+      "image":
+          "https://img.freepik.com/free-vector/business-team-brainstorming-discussing-startup-project_74855-6909.jpg",
+    },
+    {
+      "title": "Achieve Goals",
+      "subtitle":
+          "Set milestones, track progress, and celebrate victories with your entire organization.",
+      "image":
+          "https://img.freepik.com/free-vector/business-mission-concept-illustration_114360-7295.jpg",
+    },
+  ];
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Logo + Title
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          children: [
+            // 1. Top Bar (Logo + Skip)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.bolt,
-                    color: Colors.green,
-                    size: 28,
+                  Row(
+                    children: [
+                      Icon(Icons.bolt_rounded, color: _forestGreen, size: 24),
+                      const SizedBox(width: 8),
+                      Text(
+                        "Rawwaan",
+                        style: GoogleFonts.aBeeZee(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: _forestGreen,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    "Rawwaan",
-                    style: GoogleFonts.aBeeZee(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green.shade900,
+                  TextButton(
+                    onPressed: () {
+                      // Handle Skip
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.grey,
+                    ),
+                    child: Text(
+                      "Skip",
+                      style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+                    ),
+                  )
+                ],
+              ),
+            ),
+
+            // 2. Main Slider Content
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: (value) => setState(() => _currentPage = value),
+                itemCount: _onboardingData.length,
+                itemBuilder: (context, index) {
+                  return _buildPageContent(
+                    data: _onboardingData[index],
+                  );
+                },
+              ),
+            ),
+
+            // 3. Bottom Section (Indicators + Button)
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                children: [
+                  // Page Indicators
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      _onboardingData.length,
+                      (index) => AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        height: 8,
+                        width: _currentPage == index ? 24 : 8,
+                        decoration: BoxDecoration(
+                          color: _currentPage == index
+                              ? _forestGreen
+                              : Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // Primary Action Button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_currentPage < _onboardingData.length - 1) {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          // Navigate to Login
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _limeGreen,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      child: Text(
+                        _currentPage == _onboardingData.length - 1
+                            ? "Get Started"
+                            : "Next",
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: _forestGreen,
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
-
-              // Network Image with loading & error handling
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  'https://img.freepik.com/free-vector/flat-creativity-concept-illustration_52683-64279.jpg',
-                  height: 250,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return SizedBox(
-                      height: 250,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      ),
-                    );
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return const SizedBox(
-                      height: 250,
-                      child: Center(child: Icon(Icons.error, size: 40)),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 30),
-
-              // Headline
-              Text(
-                "Team Up For Success",
-                style: GoogleFonts.aBeeZee(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 10),
-
-              // Subtitle
-              Text(
-                "Great things in business are never done by one person. They're done by a team of people.",
-                maxLines: 3,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(
-                  fontSize: 12,
-                  color: Colors.black54,
-                ),
-              ),
-              const SizedBox(height: 40),
-
-              // Next Button
-              GestureDetector(
-                onTap: () {
-                  // TODO: Navigate to your app's login screen
-                },
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFBFFF60),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    "Next",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      color: Colors.green.shade900,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Skip Button
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 48),
-                  side: BorderSide(
-                    color: Colors.grey.shade300,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: () {
-                  // TODO: Skip onboarding
-                },
-                child: Text(
-                  "Skip",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                    color: Colors.black87,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildPageContent({required Map<String, String> data}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Image Container with subtle decoration
+          Container(
+            height: 300,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: const Color(0xFFF5F5FA),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Image.network(
+                data["image"]!,
+                fit: BoxFit.contain,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: _forestGreen,
+                    ),
+                  );
+                },
+                errorBuilder: (context, error, stack) => Icon(
+                  Icons.image_not_supported_outlined,
+                  color: Colors.grey.shade400,
+                  size: 50,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 40),
+
+          // Text Content
+          Text(
+            data["title"]!,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.aBeeZee(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+              height: 1.2,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            data["subtitle"]!,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.poppins(
+              fontSize: 14,
+              color: Colors.grey.shade600,
+              height: 1.5,
+            ),
+          ),
+        ],
       ),
     );
   }

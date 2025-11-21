@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// ------------------------------
-/// Rawwaan Onboarding Template V4
-/// ------------------------------
-/// Description:
-/// Modern and clean onboarding screen with:
-/// - Swipeable pages with images
-/// - Headline and subtitle per page
-/// - Sleek animated page indicators
-/// - Polished final "Get Started" button
-/// Designed for easy reuse across Rawwaan apps.
-/// ------------------------------
-
 class OnBoardingV4Screen extends StatefulWidget {
   const OnBoardingV4Screen({super.key});
 
@@ -24,39 +12,46 @@ class _OnBoardingV4ScreenState extends State<OnBoardingV4Screen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
+  // Brand Colors
+  final Color primaryColor =
+      const Color.fromARGB(255, 81, 13, 93); // Deep Purple
+  final Color accentColor = const Color(0xFFF5F5FA);
+
   final List<Map<String, String>> onboardingData = [
     {
       "image":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfveHqY7RTKdmMAGmOb-iWU-Ks0mzkjdH-nA&s",
-      "title": "Effortless Crypto Swaps",
+          "https://img.freepik.com/free-vector/digital-currency-concept-illustration_53876-114407.jpg",
+      "title": "Effortless Swaps",
       "subtitle":
           "A clean and simple way to get started. Customize this screen based on your app’s purpose.",
     },
     {
-      "image": "https://forkast.news/wp-content/uploads/2022/03/NFT-Avatar.png",
-      "title": "Secure & Fast Transactions",
+      "image":
+          "https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg",
+      "title": "Secure Access",
       "subtitle":
           "Explain your app’s main feature here. Keep it short, attractive, and benefit-focused.",
     },
     {
-      "image": "https://www.tzapac.com/images/tezos-nfts.jpeg",
-      "title": "Track Market Trends",
+      "image":
+          "https://img.freepik.com/free-vector/revenue-graph-concept-illustration_114360-4299.jpg",
+      "title": "Track Trends",
       "subtitle":
           "Describe another core feature. This should convince users why your app is worth using.",
     },
     {
       "image":
-          "https://www.sciencefriday.com/wp-content/uploads/2021/05/Vakseen-The_Resilience_of_a_Rose_8x8__Acrylic_on_wood_2020.jpg",
-      "title": "Grow Your Portfolio",
+          "https://img.freepik.com/free-vector/investor-with-laptop-monitoring-growth-dividends-trader-sitting-stack-money-investing-fund-money-wealth-management-concept-vector-illustration_74855-13272.jpg",
+      "title": "Grow Portfolio",
       "subtitle":
           "Wrap up with motivation. Tell users this app will make their life easier.",
     },
     {
       "image":
-          "https://www.sciencefriday.com/wp-content/uploads/2021/05/Vakseen-The_Resilience_of_a_Rose_8x8__Acrylic_on_wood_2020.jpg",
-      "title": "Start Your Crypto Journey",
+          "https://img.freepik.com/free-vector/rocket-concept-illustration_114360-1650.jpg",
+      "title": "Start Journey",
       "subtitle":
-          "Wrap up with motivation. Tell users this app will make their life easier.",
+          "You are all set! Join thousands of users who are already managing their workspace efficiently.",
     },
   ];
 
@@ -64,133 +59,224 @@ class _OnBoardingV4ScreenState extends State<OnBoardingV4Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // =========================
-            // 1️⃣ PAGE VIEW
-            // =========================
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                onPageChanged: (index) => setState(() {
-                  _currentIndex = index;
-                }),
-                itemCount: onboardingData.length,
-                itemBuilder: (context, index) {
-                  final item = onboardingData[index];
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
+        children: [
+          // Background Decoration (Subtle Purple Blob)
+          Positioned(
+            top: -100,
+            left: -100,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primaryColor.withOpacity(0.05),
+              ),
+            ),
+          ),
+
+          SafeArea(
+            child: Column(
+              children: [
+                // =========================
+                // 1️⃣ TOP BAR (Skip Button)
+                // =========================
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // Polished Image with shadow & rounded corners
-                      Container(
-                        width: 280,
-                        height: 280,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade300,
-                              blurRadius: 12,
-                              offset: const Offset(0, 6),
-                            )
-                          ],
+                      if (_currentIndex != onboardingData.length - 1)
+                        TextButton(
+                          onPressed: () {
+                            _pageController.animateToPage(
+                              onboardingData.length - 1,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                          child: Text(
+                            "Skip",
+                            style: GoogleFonts.abel(
+                              color: Colors.grey[500],
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.network(
-                            item['image']!,
-                            fit: BoxFit.cover,
+                    ],
+                  ),
+                ),
+
+                // =========================
+                // 2️⃣ MAIN SLIDER
+                // =========================
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    onPageChanged: (index) => setState(() {
+                      _currentIndex = index;
+                    }),
+                    itemCount: onboardingData.length,
+                    itemBuilder: (context, index) {
+                      final item = onboardingData[index];
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Image Container
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            height: 320,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30),
+                              // Soft neumorphic-style shadow
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.08),
+                                  blurRadius: 20,
+                                  offset: const Offset(0, 10),
+                                  spreadRadius: 5,
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: Image.network(
+                                item['image']!,
+                                fit: BoxFit.cover,
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      color: primaryColor.withOpacity(0.5),
+                                    ),
+                                  );
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Center(
+                                      child: Icon(Icons.broken_image,
+                                          size: 50, color: Colors.grey[300]));
+                                },
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 50),
+
+                          // Text Content
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Text(
+                              item['title']!,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.aboreto(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                                letterSpacing: 1.0,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Text(
+                              item['subtitle']!,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.abel(
+                                fontSize: 16,
+                                height: 1.5,
+                                color: Colors.grey.shade600,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+
+                // =========================
+                // 3️⃣ BOTTOM CONTROLS
+                // =========================
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 50, left: 30, right: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Page Indicators
+                      Row(
+                        children: List.generate(
+                          onboardingData.length,
+                          (index) => AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: const EdgeInsets.only(right: 6),
+                            width: _currentIndex == index ? 24 : 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: _currentIndex == index
+                                  ? primaryColor
+                                  : Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
 
-                      // Title
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: Text(
-                          item['title']!,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          style: GoogleFonts.acme(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w900,
-                            color: Colors.black26.withOpacity(0.8),
-                            letterSpacing: 1.2,
+                      // Dynamic Action Button (Arrow -> "Get Started")
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        width: _currentIndex == onboardingData.length - 1
+                            ? 160
+                            : 60,
+                        height: 60,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (_currentIndex < onboardingData.length - 1) {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            } else {
+                              // TODO: Navigate to Auth Screen
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            elevation: 8,
+                            shadowColor: primaryColor.withOpacity(0.4),
+                            padding: EdgeInsets.zero,
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-
-                      // Subtitle
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: Text(
-                          item['subtitle']!,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                            fontSize: 13,
-                            height: 1.5,
-                            color: Colors.grey.shade600,
-                          ),
+                          child: _currentIndex == onboardingData.length - 1
+                              ? Text(
+                                  "Get Started",
+                                  style: GoogleFonts.abel(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : const Icon(
+                                  Icons.arrow_forward_rounded,
+                                  color: Colors.white,
+                                  size: 28,
+                                ),
                         ),
                       ),
                     ],
-                  );
-                },
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // =========================
-            // 2️⃣ PAGE INDICATOR / BUTTON
-            // =========================
-            _currentIndex == onboardingData.length - 1
-                ? GestureDetector(
-                    onTap: () {
-                      // TODO: Navigate to your app's main/home screen
-                    },
-                    child: Container(
-                      width: 280,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      child: Text(
-                        "I am ready to start",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      onboardingData.length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        width: 3,
-                        height: _currentIndex == index ? 18 : 13,
-                        decoration: BoxDecoration(
-                          color: _currentIndex == index
-                              ? Colors.black
-                              : Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                    ),
                   ),
-
-            const SizedBox(height: 40),
-          ],
-        ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
