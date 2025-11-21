@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v3.dart';
+import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v4.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: OnBoardingV3Screen(),
+      home: OnBoardingV4Screen(),
     );
   }
 }
