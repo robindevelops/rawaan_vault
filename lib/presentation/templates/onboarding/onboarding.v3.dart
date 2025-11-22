@@ -76,7 +76,7 @@ class _OnBoardingV3ScreenState extends State<OnBoardingV3Screen> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
-                'CircleUp',
+                'Rawaan',
                 style: GoogleFonts.abrilFatface(
                   fontSize: 30,
                   height: 1.1,

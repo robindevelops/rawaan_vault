@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: AuthV3Screen(),
+      home: AuthV1Screen(),
     );
   }
 }
