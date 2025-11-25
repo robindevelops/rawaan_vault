@@ -9,6 +9,12 @@ import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v2.dar
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v3.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v4.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v5.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v1.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v2.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v3.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v4.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v5.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v6.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +31,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: AuthV1Screen(),
+      home: WelcomeV6Screen(),
     );
   }
 }
