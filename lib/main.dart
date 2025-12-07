@@ -4,13 +4,19 @@ import 'package:rawaan_vault/presentation/templates/auth/auth.v2.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v3.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v4.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v5.dart';
+import 'package:rawaan_vault/presentation/templates/finance/finance.v1.dart';
+import 'package:rawaan_vault/presentation/templates/government/government.v1.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v1.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v2.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v3.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v4.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v5.dart';
+import 'package:rawaan_vault/presentation/templates/uber/uber.v1.dart';
+import 'package:rawaan_vault/presentation/templates/uber/uber.v2.dart';
+import 'package:rawaan_vault/presentation/templates/uber/uber.v3.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v1.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v10.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v11.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v2.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v3.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v4.dart';
@@ -35,7 +41,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: WelcomeV2Screen(),
+      home: UberV1Screen(),
     );
   }
 }
