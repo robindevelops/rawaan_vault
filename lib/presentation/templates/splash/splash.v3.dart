@@ -92,25 +92,19 @@ class _SplashV3ScreenState extends State<SplashV3Screen>
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(7),
                   color: Colors.black, // Icon background
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 15,
-                      offset: const Offset(0, 10),
-                    )
-                  ],
                 ),
                 child: const Icon(
                   Icons.local_taxi,
-                  size: 50,
+                  size: 30,
                   color: Colors.amber, // Icon color inverted
                 ),
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
 
             // --- TITLE ANIMATION ---
             FadeTransition(
@@ -119,9 +113,9 @@ class _SplashV3ScreenState extends State<SplashV3Screen>
                 position: _textSlideAnimation,
                 child: Text(
                   "Rawaan",
-                  style: GoogleFonts.fahkwang(
+                  style: GoogleFonts.cairo(
                     color: Colors.black,
-                    fontSize: 52,
+                    fontSize: 30,
                     fontWeight: FontWeight.w800, // Extra bold
                     letterSpacing: -1.0, // Tighter for modern look
                   ),
@@ -136,11 +130,10 @@ class _SplashV3ScreenState extends State<SplashV3Screen>
               opacity: _subtitleFadeAnimation,
               child: Text(
                 "EST. 2025",
-                style: GoogleFonts.fahkwang(
+                style: GoogleFonts.calistoga(
                   color: Colors.black.withOpacity(0.6),
-                  fontSize: 14,
-                  letterSpacing: 6.0, // Wide spacing for elegance
-                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  letterSpacing: 2.0, // Wide spacing for elegance
                 ),
               ),
             ),

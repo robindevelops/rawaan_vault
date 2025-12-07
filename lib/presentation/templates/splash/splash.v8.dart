@@ -79,7 +79,7 @@ class _SplashV8ScreenState extends State<SplashV8Screen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF111111), // Soft Matte Black
+      backgroundColor: const Color(0xFF06C167),
       body: Center(
         child: AnimatedBuilder(
           animation: _controller,
@@ -101,21 +101,22 @@ class _SplashV8ScreenState extends State<SplashV8Screen>
                       const Icon(
                         Icons
                             .trip_origin, // Abstract circle/dot is very minimal
-                        color: Colors.white,
+                        color: Colors.black,
                         size: 18,
                       ),
 
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
 
                       // Typography
                       Text(
                         "RAWAAN",
-                        style: GoogleFonts.laila(
-                          // Manrope is clean & geometric
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.w500, // Light weight = Elegant
-                          letterSpacing: _spacingAnimation.value,
+                        style: GoogleFonts.fjallaOne(
+                          color: const Color.fromARGB(255, 7, 75, 18),
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          // letterSpacing: 2.0, // Tight & Solid
+                          height: 1.0,
+                          fontStyle: FontStyle.italic,
                         ),
                       ),
                     ],

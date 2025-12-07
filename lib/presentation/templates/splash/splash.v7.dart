@@ -134,11 +134,12 @@ class _SplashV7ScreenState extends State<SplashV7Screen>
             position: slideAnim,
             child: Text(
               _title[index],
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.fjallaOne(
                 color: Colors.white,
-                fontSize: 48,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 4.0,
+                fontSize: 40,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 2.0, // Tight & Solid
+                height: 1.0,
               ),
             ),
           ),

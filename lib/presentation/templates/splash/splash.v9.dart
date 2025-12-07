@@ -102,13 +102,13 @@ class _SplashV9ScreenState extends State<SplashV9Screen>
                   position: _textSlideAnimation,
                   child: Text(
                     "RAWAAN",
-                    style: GoogleFonts.dmSans(
-                      // Geometric & Clean
-                      color: text,
-                      fontSize: 56,
-                      fontWeight: FontWeight.w900, // Extra Bold
-                      letterSpacing: -2.0, // Tight spacing = Modern
-                      height: 1.0, // Removes extra padding
+                    style: GoogleFonts.fjallaOne(
+                      color: Colors.black,
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold,
+                      // letterSpacing: 2.0, // Tight & Solid
+                      height: 1.0,
+                      // fontStyle: FontStyle.italic,
                     ),
                   ),
                 ),

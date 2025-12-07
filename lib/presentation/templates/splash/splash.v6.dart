@@ -116,23 +116,26 @@ class _SplashV6ScreenState extends State<SplashV6Screen>
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         // Icon
-                        const Icon(Icons.near_me_rounded,
-                            color: Colors.black, size: 60),
+                        const Icon(
+                          Icons.near_me_rounded,
+                          color: Colors.black,
+                          size: 30,
+                        ),
 
                         const SizedBox(height: 10),
 
                         // Text
                         Text(
                           "RAWAAN",
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.fjallaOne(
                             color: Colors.black,
-                            fontSize: 50,
-                            fontWeight:
-                                FontWeight.w900, // Heavy weight for impact
-                            letterSpacing: -2.0, // Tight & Solid
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 2.0, // Tight & Solid
                             height: 1.0,
                           ),
                         ),
+                        SizedBox(height: 5),
 
                         // Tagline (Static, attached to bottom)
                         Text(

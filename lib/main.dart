@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: SplashV16Screen(),
+      home: SplashV20Screen(),
     );
   }
 }

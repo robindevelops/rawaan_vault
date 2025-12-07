@@ -119,11 +119,12 @@ class _SplashV13ScreenState extends State<SplashV13Screen>
                   position: _rightPartSlide,
                   child: Text(
                     "RAWAAN",
-                    style: GoogleFonts.aDLaMDisplay(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w900,
+                    style: GoogleFonts.aclonica(
                       color: Colors.white,
-                      letterSpacing: 1.0,
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      // letterSpacing: 2.0, // Tight & Solid
+                      height: 1.0,
                     ),
                   ),
                 ),

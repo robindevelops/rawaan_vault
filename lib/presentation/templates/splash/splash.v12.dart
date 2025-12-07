@@ -109,11 +109,13 @@ class _SplashV12ScreenState extends State<SplashV12Screen>
         const SizedBox(height: 15),
         Text(
           "RAWAAN",
-          style: GoogleFonts.dmSans(
-            fontSize: 50,
-            fontWeight: FontWeight.w900, // Thick bold looks best for masking
+          style: GoogleFonts.fjallaOne(
             color: color,
-            letterSpacing: -1.0,
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            // letterSpacing: 2.0, // Tight & Solid
+            height: 1.0,
+            fontStyle: FontStyle.italic,
           ),
         ),
       ],
