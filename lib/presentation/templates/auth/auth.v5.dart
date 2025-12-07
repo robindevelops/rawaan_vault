@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AuthTabScreen extends StatefulWidget {
-  const AuthTabScreen({super.key});
+class AuthV5Screen extends StatefulWidget {
+  const AuthV5Screen({super.key});
 
   @override
-  State<AuthTabScreen> createState() => _AuthTabScreenState();
+  State<AuthV5Screen> createState() => _AuthV5ScreenState();
 }
 
-class _AuthTabScreenState extends State<AuthTabScreen>
+class _AuthV5ScreenState extends State<AuthV5Screen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final primaryColor = const Color.fromARGB(255, 81, 13, 93);
