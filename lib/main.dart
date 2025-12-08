@@ -24,8 +24,15 @@ import 'package:rawaan_vault/presentation/templates/splash/splash.v17.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v18.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v19.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v2.dart';
-import 'package:rawaan_vault/presentation/templates/splash/splash.v1.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v20.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v21.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v22.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v23.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v24.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v25.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v26.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v27.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v28.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v3.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v4.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v5.dart';
@@ -47,6 +54,7 @@ import 'package:rawaan_vault/presentation/templates/welcome/welcome.v6.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v7.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v8.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v9.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,7 +71,9 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: SplashV20Screen(),
+      home: V28CinematicSplash(),
     );
   }
 }
+
+// DEBUG: Active widget count → 46
