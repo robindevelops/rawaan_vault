@@ -33,7 +33,9 @@ import 'package:rawaan_vault/presentation/templates/splash/splash.v25.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v26.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v27.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v28.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v29.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v3.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v30.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v4.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v5.dart';
 import 'package:rawaan_vault/presentation/templates/splash/splash.v6.dart';
@@ -71,7 +73,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: V28CinematicSplash(),
+      home: SplashV1Screen(),
     );
   }
 }

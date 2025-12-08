@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-class V28CinematicSplash extends StatefulWidget {
-  const V28CinematicSplash({super.key});
+class SplashV28Screen extends StatefulWidget {
+  const SplashV28Screen({super.key});
 
   @override
-  State<V28CinematicSplash> createState() => _V28CinematicSplashState();
+  State<SplashV28Screen> createState() => _SplashV28ScreenState();
 }
 
-class _V28CinematicSplashState extends State<V28CinematicSplash>
+class _SplashV28ScreenState extends State<SplashV28Screen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
