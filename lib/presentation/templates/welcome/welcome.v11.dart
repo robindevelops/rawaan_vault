@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart'; // For custom fonts
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
+class WelcomeV11Screen extends StatefulWidget {
+  const WelcomeV11Screen({super.key});
 
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
+  State<WelcomeV11Screen> createState() => _WelcomeV11ScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeV11ScreenState extends State<WelcomeV11Screen> {
   // --- Design Constants ---
   final Color _backgroundColor = const Color.fromARGB(255, 184, 247, 111);
 

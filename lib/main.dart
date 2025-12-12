@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: SplashV1Screen(),
+      home: OnBoardingV1Screen(),
     );
   }
 }
