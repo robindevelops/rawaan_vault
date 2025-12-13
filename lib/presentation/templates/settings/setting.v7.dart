@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Settings v7 - Dark Purple Accent Theme
+/// Settings v9 - Dark Green Accent Theme
 class SettingV7Screen extends StatefulWidget {
   const SettingV7Screen({super.key});
 
@@ -11,11 +11,14 @@ class SettingV7Screen extends StatefulWidget {
 }
 
 class _SettingV7ScreenState extends State<SettingV7Screen> {
-  static const Color _bg = Color(0xFF13111C);
-  static const Color _card = Color(0xFF1E1B2E);
-  static const Color _accent = Color(0xFFA78BFA);
+  static const Color _bg = Color(0xFF0A0F0D);
+  static const Color _card = Color(0xFF141F1A);
+  static const Color _accent = Color(0xFF22C55E);
   static const Color _text = Color(0xFFFFFFFF);
-  static const Color _textSec = Color(0xFF9CA3AF);
+  static const Color _textSec = Color(0xFF6B7280);
+
+  bool _biometric = true;
+  bool _notifications = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,152 +27,188 @@ class _SettingV7ScreenState extends State<SettingV7Screen> {
       child: Scaffold(
         backgroundColor: _bg,
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _profileHeader(),
-                const SizedBox(height: 8),
-                _membershipCard(),
-                const SizedBox(height: 24),
-                _iconMenu(),
-                const SizedBox(height: 24),
-                _settingsList(),
-              ],
-            ),
+          child: Column(
+            children: [
+              _header(),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      _balanceCard(),
+                      const SizedBox(height: 24),
+                      _securitySection(),
+                      const SizedBox(height: 20),
+                      _menuSection(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _profileHeader() => Padding(
+  Widget _header() => Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
+              width: 48,
+              height: 48,
               decoration: BoxDecoration(
-                  color: _card, borderRadius: BorderRadius.circular(12)),
-              child:
-                  const Icon(Icons.arrow_back_ios_new, color: _text, size: 18),
-            ),
-            const Spacer(),
-            Text('Profile',
-                style: GoogleFonts.inter(
-                    color: _text, fontSize: 18, fontWeight: FontWeight.w600)),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: _card, borderRadius: BorderRadius.circular(12)),
-              child: const Icon(Icons.more_horiz, color: _text, size: 20),
-            ),
-          ],
-        ),
-      );
-
-  Widget _membershipCard() => Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [_accent, const Color(0xFF818CF8)]),
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Row(
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
-              child: const Center(
+                border: Border.all(color: _accent, width: 2),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Center(
                   child: Text('R',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
+                          color: _accent,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold))),
             ),
-            const SizedBox(width: 20),
+            const SizedBox(width: 14),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Rawaan',
                       style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700)),
-                  const SizedBox(height: 4),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Text('PRO MEMBER',
-                        style: GoogleFonts.inter(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1)),
-                  ),
+                          color: _text,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600)),
+                  Text('Premium Plan',
+                      style: GoogleFonts.inter(color: _accent, fontSize: 13)),
                 ],
               ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: _card, borderRadius: BorderRadius.circular(12)),
+              child: Icon(Icons.settings, color: _text, size: 22),
             ),
           ],
         ),
       );
 
-  Widget _iconMenu() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _iconBtn('Wallet', Icons.account_balance_wallet_outlined),
-            _iconBtn('History', Icons.history),
-            _iconBtn('Saved', Icons.bookmark_outline),
-            _iconBtn('Invite', Icons.person_add_outlined),
-          ],
-        ),
-      );
-
-  Widget _iconBtn(String label, IconData icon) => Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: _card, borderRadius: BorderRadius.circular(16)),
-            child: Icon(icon, color: _accent, size: 24),
-          ),
-          const SizedBox(height: 8),
-          Text(label, style: GoogleFonts.inter(color: _textSec, fontSize: 12)),
-        ],
-      );
-
-  Widget _settingsList() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            _settingTile('Edit Profile', Icons.edit_outlined),
-            _settingTile('Security', Icons.shield_outlined),
-            _settingTile('Notifications', Icons.notifications_outlined),
-            _settingTile('Language', Icons.language),
-            _settingTile('Dark Mode', Icons.dark_mode_outlined),
-            const SizedBox(height: 16),
-            _logoutTile(),
-          ],
-        ),
-      );
-
-  Widget _settingTile(String title, IconData icon) => Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(16),
+  Widget _balanceCard() => Container(
+        padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-            color: _card, borderRadius: BorderRadius.circular(16)),
+          color: _accent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Available Balance',
+                    style:
+                        GoogleFonts.inter(color: Colors.white70, fontSize: 14)),
+                Icon(Icons.visibility_outlined,
+                    color: Colors.white70, size: 20),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text('\$24,580.00',
+                style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w700)),
+            const SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(child: _cardBtn('Deposit', Icons.add)),
+                const SizedBox(width: 12),
+                Expanded(child: _cardBtn('Withdraw', Icons.arrow_upward)),
+              ],
+            ),
+          ],
+        ),
+      );
+
+  Widget _cardBtn(String label, IconData icon) => Container(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white, size: 18),
+            const SizedBox(width: 8),
+            Text(label,
+                style: GoogleFonts.inter(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600)),
+          ],
+        ),
+      );
+
+  Widget _securitySection() => Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: _card, borderRadius: BorderRadius.circular(18)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Security',
+                style: GoogleFonts.inter(
+                    color: _text, fontSize: 16, fontWeight: FontWeight.w600)),
+            const SizedBox(height: 16),
+            _toggleItem('Biometric Login', Icons.fingerprint, _biometric,
+                (v) => setState(() => _biometric = v)),
+            _toggleItem('Push Notifications', Icons.notifications_outlined,
+                _notifications, (v) => setState(() => _notifications = v)),
+          ],
+        ),
+      );
+
+  Widget _toggleItem(
+          String title, IconData icon, bool value, Function(bool) onChanged) =>
+      Padding(
+        padding: const EdgeInsets.only(bottom: 12),
         child: Row(
           children: [
             Icon(icon, color: _accent, size: 22),
-            const SizedBox(width: 16),
+            const SizedBox(width: 14),
+            Expanded(
+                child: Text(title,
+                    style: GoogleFonts.inter(color: _text, fontSize: 15))),
+            Switch(
+                value: value,
+                onChanged: onChanged,
+                activeColor: _accent,
+                activeTrackColor: _accent.withOpacity(0.3)),
+          ],
+        ),
+      );
+
+  Widget _menuSection() => Column(
+        children: [
+          _menuItem('Account Details', Icons.person_outline),
+          _menuItem('Payment Methods', Icons.credit_card_outlined),
+          _menuItem('Transaction History', Icons.history),
+          _menuItem('Help & Support', Icons.help_outline),
+          const SizedBox(height: 16),
+          _logoutItem(),
+        ],
+      );
+
+  Widget _menuItem(String title, IconData icon) => Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+            color: _card, borderRadius: BorderRadius.circular(14)),
+        child: Row(
+          children: [
+            Icon(icon, color: _accent, size: 22),
+            const SizedBox(width: 14),
             Expanded(
                 child: Text(title,
                     style: GoogleFonts.inter(color: _text, fontSize: 15))),
@@ -178,14 +217,14 @@ class _SettingV7ScreenState extends State<SettingV7Screen> {
         ),
       );
 
-  Widget _logoutTile() => Container(
+  Widget _logoutItem() => Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: _card, borderRadius: BorderRadius.circular(16)),
+            color: _card, borderRadius: BorderRadius.circular(14)),
         child: Row(
           children: [
             Icon(Icons.logout, color: Colors.red[400], size: 22),
-            const SizedBox(width: 16),
+            const SizedBox(width: 14),
             Text('Log Out',
                 style: GoogleFonts.inter(color: Colors.red[400], fontSize: 15)),
           ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Settings v6 - Navy Blue Theme
+/// Settings v8 - Light Gray Minimal Theme
 class SettingV6Screen extends StatefulWidget {
   const SettingV6Screen({super.key});
 
@@ -11,35 +11,49 @@ class SettingV6Screen extends StatefulWidget {
 }
 
 class _SettingV6ScreenState extends State<SettingV6Screen> {
-  static const Color _bg = Color(0xFF0F172A);
-  static const Color _card = Color(0xFF1E293B);
-  static const Color _accent = Color(0xFF60A5FA);
-  static const Color _text = Color(0xFFF1F5F9);
-  static const Color _textSec = Color(0xFF94A3B8);
+  static const Color _bg = Color(0xFFFFFFFF);
+  static const Color _surface = Color(0xFFF4F4F5);
+  static const Color _text = Color(0xFF18181B);
+  static const Color _textSec = Color(0xFF71717A);
+  static const Color _border = Color(0xFFE4E4E7);
 
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+      value: SystemUiOverlayStyle.dark,
       child: Scaffold(
         backgroundColor: _bg,
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _header(),
-                const SizedBox(height: 24),
-                _statsRow(),
-                const SizedBox(height: 28),
                 Text('Settings',
                     style: GoogleFonts.inter(
                         color: _text,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600)),
-                const SizedBox(height: 16),
-                _settingsList(),
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700)),
+                const SizedBox(height: 32),
+                _userTile(),
+                const SizedBox(height: 32),
+                _section('ACCOUNT', [
+                  _listItem('Personal Information', Icons.person_outline),
+                  _listItem('Password & Security', Icons.lock_outline),
+                  _listItem('Privacy Settings', Icons.visibility_outlined),
+                ]),
+                _section('PREFERENCES', [
+                  _listItem('Notifications', Icons.notifications_outlined),
+                  _listItem('Appearance', Icons.contrast),
+                  _listItem('Language', Icons.translate),
+                ]),
+                _section('SUPPORT', [
+                  _listItem('Help Center', Icons.help_outline),
+                  _listItem('Report a Problem', Icons.flag_outlined),
+                  _listItem('Rate Us', Icons.star_outline),
+                ]),
+                const SizedBox(height: 24),
+                _logoutBtn(),
               ],
             ),
           ),
@@ -48,140 +62,94 @@ class _SettingV6ScreenState extends State<SettingV6Screen> {
     );
   }
 
-  Widget _header() => Row(
-        children: [
-          Container(
-            width: 56,
-            height: 56,
-            decoration: BoxDecoration(
-              gradient:
-                  LinearGradient(colors: [_accent, const Color(0xFF818CF8)]),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Center(
-                child: Text('R',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold))),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Rawaan User',
-                    style: GoogleFonts.inter(
-                        color: _text,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600)),
-                Row(
-                  children: [
-                    Icon(Icons.verified, color: _accent, size: 16),
-                    const SizedBox(width: 4),
-                    Text('Verified Account',
-                        style: GoogleFonts.inter(color: _accent, fontSize: 13)),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-                color: _card, borderRadius: BorderRadius.circular(14)),
-            child: const Icon(Icons.qr_code, color: _text, size: 22),
-          ),
-        ],
-      );
-
-  Widget _statsRow() => Row(
-        children: [
-          _statCard('12', 'Projects'),
-          const SizedBox(width: 12),
-          _statCard('48', 'Tasks'),
-          const SizedBox(width: 12),
-          _statCard('156', 'Hours'),
-        ],
-      );
-
-  Widget _statCard(String value, String label) => Expanded(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          decoration: BoxDecoration(
-              color: _card, borderRadius: BorderRadius.circular(16)),
-          child: Column(
-            children: [
-              Text(value,
-                  style: GoogleFonts.inter(
-                      color: _accent,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700)),
-              const SizedBox(height: 4),
-              Text(label,
-                  style: GoogleFonts.inter(color: _textSec, fontSize: 12)),
-            ],
-          ),
-        ),
-      );
-
-  Widget _settingsList() => Column(
-        children: [
-          _settingItem('Account', Icons.person_outline, 'Manage your account'),
-          _settingItem(
-              'Notifications', Icons.notifications_outlined, '3 new alerts'),
-          _settingItem('Appearance', Icons.palette_outlined, 'Dark mode'),
-          _settingItem('Security', Icons.shield_outlined, 'Two-factor enabled'),
-          _settingItem('Storage', Icons.cloud_outlined, '65% used'),
-          _settingItem('Help', Icons.help_outline, 'FAQs and support'),
-          const SizedBox(height: 20),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            decoration: BoxDecoration(
-                color: _accent, borderRadius: BorderRadius.circular(14)),
-            child: Center(
-                child: Text('Upgrade to Pro',
-                    style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600))),
-          ),
-        ],
-      );
-
-  Widget _settingItem(String title, IconData icon, String subtitle) =>
-      Container(
-        margin: const EdgeInsets.only(bottom: 12),
+  Widget _userTile() => Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: _card, borderRadius: BorderRadius.circular(16)),
+            color: _surface, borderRadius: BorderRadius.circular(16)),
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
+              width: 56,
+              height: 56,
               decoration: BoxDecoration(
-                  color: _accent.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(12)),
-              child: Icon(icon, color: _accent, size: 22),
+                  color: _text, borderRadius: BorderRadius.circular(14)),
+              child: const Center(
+                  child: Text('R',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold))),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,
+                  Text('Rawaan User',
                       style: GoogleFonts.inter(
                           color: _text,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500)),
-                  Text(subtitle,
-                      style: GoogleFonts.inter(color: _textSec, fontSize: 12)),
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600)),
+                  Text('rawaan@email.com',
+                      style: GoogleFonts.inter(color: _textSec, fontSize: 14)),
                 ],
               ),
             ),
             Icon(Icons.chevron_right, color: _textSec),
           ],
         ),
+      );
+
+  Widget _section(String title, List<Widget> items) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Text(title,
+                style: GoogleFonts.inter(
+                    color: _textSec,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1)),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: _border),
+                borderRadius: BorderRadius.circular(16)),
+            child: Column(children: items),
+          ),
+          const SizedBox(height: 24),
+        ],
+      );
+
+  Widget _listItem(String title, IconData icon) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        decoration: BoxDecoration(
+            border:
+                Border(bottom: BorderSide(color: _border.withOpacity(0.5)))),
+        child: Row(
+          children: [
+            Icon(icon, color: _text, size: 22),
+            const SizedBox(width: 16),
+            Expanded(
+                child: Text(title,
+                    style: GoogleFonts.inter(color: _text, fontSize: 15))),
+            Icon(Icons.chevron_right, color: _textSec, size: 20),
+          ],
+        ),
+      );
+
+  Widget _logoutBtn() => Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.red),
+            borderRadius: BorderRadius.circular(14)),
+        child: Center(
+            child: Text('Sign Out',
+                style: GoogleFonts.inter(
+                    color: Colors.red,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600))),
       );
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Settings v9 - Dark Green Accent Theme
+/// Settings v12 - Indigo Theme
 class SettingV9Screen extends StatefulWidget {
   const SettingV9Screen({super.key});
 
@@ -11,222 +11,227 @@ class SettingV9Screen extends StatefulWidget {
 }
 
 class _SettingV9ScreenState extends State<SettingV9Screen> {
-  static const Color _bg = Color(0xFF0A0F0D);
-  static const Color _card = Color(0xFF141F1A);
-  static const Color _accent = Color(0xFF22C55E);
-  static const Color _text = Color(0xFFFFFFFF);
-  static const Color _textSec = Color(0xFF6B7280);
-
-  bool _biometric = true;
-  bool _notifications = true;
+  static const Color _bg = Color(0xFFF0F4FF);
+  static const Color _card = Color(0xFFFFFFFF);
+  static const Color _accent = Color(0xFF4F46E5);
+  static const Color _text = Color(0xFF1E1B4B);
+  static const Color _textSec = Color(0xFF6366F1);
 
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
+      value: SystemUiOverlayStyle.dark,
       child: Scaffold(
         backgroundColor: _bg,
         body: SafeArea(
-          child: Column(
-            children: [
-              _header(),
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      _balanceCard(),
-                      const SizedBox(height: 24),
-                      _securitySection(),
-                      const SizedBox(height: 20),
-                      _menuSection(),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _header(),
+                const SizedBox(height: 24),
+                _profileCard(),
+                const SizedBox(height: 24),
+                _planCard(),
+                const SizedBox(height: 24),
+                _settingsGrid(),
+                const SizedBox(height: 24),
+                _supportSection(),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _header() => Padding(
+  Widget _header() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text('Settings',
+              style: GoogleFonts.inter(
+                  color: _text, fontSize: 28, fontWeight: FontWeight.w700)),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+                color: _card,
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.05), blurRadius: 10)
+                ]),
+            child: Icon(Icons.search, color: _accent),
+          ),
+        ],
+      );
+
+  Widget _profileCard() => Container(
         padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: _card,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(color: _accent.withOpacity(0.1), blurRadius: 20)
+            ]),
         child: Row(
           children: [
             Container(
-              width: 48,
-              height: 48,
+              width: 60,
+              height: 60,
               decoration: BoxDecoration(
-                border: Border.all(color: _accent, width: 2),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Center(
+                  gradient: LinearGradient(
+                      colors: [_accent, const Color(0xFF818CF8)]),
+                  borderRadius: BorderRadius.circular(16)),
+              child: const Center(
                   child: Text('R',
                       style: TextStyle(
-                          color: _accent,
-                          fontSize: 20,
+                          color: Colors.white,
+                          fontSize: 26,
                           fontWeight: FontWeight.bold))),
             ),
-            const SizedBox(width: 14),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Rawaan',
+                  Text('Rawaan User',
                       style: GoogleFonts.inter(
                           color: _text,
                           fontSize: 18,
                           fontWeight: FontWeight.w600)),
-                  Text('Premium Plan',
-                      style: GoogleFonts.inter(color: _accent, fontSize: 13)),
+                  Text('Edit Profile',
+                      style: GoogleFonts.inter(color: _textSec, fontSize: 13)),
                 ],
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: _card, borderRadius: BorderRadius.circular(12)),
-              child: Icon(Icons.settings, color: _text, size: 22),
-            ),
-          ],
-        ),
-      );
-
-  Widget _balanceCard() => Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: _accent,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Available Balance',
-                    style:
-                        GoogleFonts.inter(color: Colors.white70, fontSize: 14)),
-                Icon(Icons.visibility_outlined,
-                    color: Colors.white70, size: 20),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text('\$24,580.00',
-                style: GoogleFonts.inter(
-                    color: Colors.white,
-                    fontSize: 32,
-                    fontWeight: FontWeight.w700)),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(child: _cardBtn('Deposit', Icons.add)),
-                const SizedBox(width: 12),
-                Expanded(child: _cardBtn('Withdraw', Icons.arrow_upward)),
-              ],
-            ),
-          ],
-        ),
-      );
-
-  Widget _cardBtn(String label, IconData icon) => Container(
-        padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(12)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: Colors.white, size: 18),
-            const SizedBox(width: 8),
-            Text(label,
-                style: GoogleFonts.inter(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600)),
-          ],
-        ),
-      );
-
-  Widget _securitySection() => Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-            color: _card, borderRadius: BorderRadius.circular(18)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Security',
-                style: GoogleFonts.inter(
-                    color: _text, fontSize: 16, fontWeight: FontWeight.w600)),
-            const SizedBox(height: 16),
-            _toggleItem('Biometric Login', Icons.fingerprint, _biometric,
-                (v) => setState(() => _biometric = v)),
-            _toggleItem('Push Notifications', Icons.notifications_outlined,
-                _notifications, (v) => setState(() => _notifications = v)),
-          ],
-        ),
-      );
-
-  Widget _toggleItem(
-          String title, IconData icon, bool value, Function(bool) onChanged) =>
-      Padding(
-        padding: const EdgeInsets.only(bottom: 12),
-        child: Row(
-          children: [
-            Icon(icon, color: _accent, size: 22),
-            const SizedBox(width: 14),
-            Expanded(
-                child: Text(title,
-                    style: GoogleFonts.inter(color: _text, fontSize: 15))),
-            Switch(
-                value: value,
-                onChanged: onChanged,
-                activeColor: _accent,
-                activeTrackColor: _accent.withOpacity(0.3)),
-          ],
-        ),
-      );
-
-  Widget _menuSection() => Column(
-        children: [
-          _menuItem('Account Details', Icons.person_outline),
-          _menuItem('Payment Methods', Icons.credit_card_outlined),
-          _menuItem('Transaction History', Icons.history),
-          _menuItem('Help & Support', Icons.help_outline),
-          const SizedBox(height: 16),
-          _logoutItem(),
-        ],
-      );
-
-  Widget _menuItem(String title, IconData icon) => Container(
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-            color: _card, borderRadius: BorderRadius.circular(14)),
-        child: Row(
-          children: [
-            Icon(icon, color: _accent, size: 22),
-            const SizedBox(width: 14),
-            Expanded(
-                child: Text(title,
-                    style: GoogleFonts.inter(color: _text, fontSize: 15))),
             Icon(Icons.chevron_right, color: _textSec),
           ],
         ),
       );
 
-  Widget _logoutItem() => Container(
-        padding: const EdgeInsets.all(16),
+  Widget _planCard() => Container(
+        padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-            color: _card, borderRadius: BorderRadius.circular(14)),
+            gradient:
+                LinearGradient(colors: [_accent, const Color(0xFF7C3AED)]),
+            borderRadius: BorderRadius.circular(20)),
         child: Row(
           children: [
-            Icon(Icons.logout, color: Colors.red[400], size: 22),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(14)),
+              child: const Icon(Icons.diamond_outlined,
+                  color: Colors.white, size: 24),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Upgrade to Pro',
+                      style: GoogleFonts.inter(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600)),
+                  Text('Unlock all features',
+                      style: GoogleFonts.inter(
+                          color: Colors.white70, fontSize: 13)),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
+              child: Text('Go Pro',
+                  style: GoogleFonts.inter(
+                      color: _accent,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600)),
+            ),
+          ],
+        ),
+      );
+
+  Widget _settingsGrid() => GridView.count(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        crossAxisCount: 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        childAspectRatio: 1.4,
+        children: [
+          _gridCard('Account', Icons.person_outline),
+          _gridCard('Privacy', Icons.shield_outlined),
+          _gridCard('Notifications', Icons.notifications_outlined),
+          _gridCard('Appearance', Icons.palette_outlined),
+        ],
+      );
+
+  Widget _gridCard(String label, IconData icon) => Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+            color: _card,
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10)
+            ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: _accent.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12)),
+              child: Icon(icon, color: _accent, size: 22),
+            ),
+            const Spacer(),
+            Text(label,
+                style: GoogleFonts.inter(
+                    color: _text, fontSize: 15, fontWeight: FontWeight.w500)),
+          ],
+        ),
+      );
+
+  Widget _supportSection() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('SUPPORT',
+              style: GoogleFonts.inter(
+                  color: _textSec,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1)),
+          const SizedBox(height: 12),
+          _supportItem('Help Center', Icons.help_outline),
+          _supportItem('About', Icons.info_outline),
+          _supportItem('Log Out', Icons.logout, isLogout: true),
+        ],
+      );
+
+  Widget _supportItem(String title, IconData icon, {bool isLogout = false}) =>
+      Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+            color: _card,
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)
+            ]),
+        child: Row(
+          children: [
+            Icon(icon, color: isLogout ? Colors.red : _accent, size: 22),
             const SizedBox(width: 14),
-            Text('Log Out',
-                style: GoogleFonts.inter(color: Colors.red[400], fontSize: 15)),
+            Text(title,
+                style: GoogleFonts.inter(
+                    color: isLogout ? Colors.red : _text, fontSize: 15)),
+            const Spacer(),
+            if (!isLogout) Icon(Icons.chevron_right, color: _textSec, size: 20),
           ],
         ),
       );
