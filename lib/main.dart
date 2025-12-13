@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_discover_screen.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_forgot_password_screen.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_login_screen.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_onboarding_screen.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_signup_screen.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_welcome_screen.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v1.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v10.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v11.dart';
@@ -35,6 +41,11 @@ import 'package:rawaan_vault/presentation/templates/settings/setting.v6.dart';
 import 'package:rawaan_vault/presentation/templates/settings/setting.v7.dart';
 import 'package:rawaan_vault/presentation/templates/settings/setting.v8.dart';
 import 'package:rawaan_vault/presentation/templates/settings/setting.v9.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v1.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v10.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v12.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v2.dart';
+import 'package:rawaan_vault/presentation/templates/splash/splash.v3.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v12.dart';
 import 'package:rawaan_vault/presentation/templates/welcome/welcome.v13.dart';
 
@@ -53,7 +64,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: SettingV9Screen(),
+      home: LozoWelcomeScreen(),
     );
   }
 }
