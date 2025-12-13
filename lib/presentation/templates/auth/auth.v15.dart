@@ -84,7 +84,7 @@ class _AuthV15ScreenState extends State<AuthV15Screen>
                     key: _formKey,
                     child: Column(
                       children: [
-                        const SizedBox(height: 20),
+                        // const SizedBox(height: 20),
                         _buildCreativeLogo(),
                         const SizedBox(height: 20),
                         _buildGlassCard(),
@@ -319,7 +319,7 @@ class _AuthV15ScreenState extends State<AuthV15Screen>
                   ),
                 ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 10),
               _buildCreativeButton(),
             ],
           ),
