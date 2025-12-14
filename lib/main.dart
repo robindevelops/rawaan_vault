@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_cart_screen.dart';
+import 'package:rawaan_vault/presentation/premium/loza/loza_welcome_screen.dart';
+import 'package:rawaan_vault/presentation/premium/maniro/maniro_home_screen.dart';
+import 'package:rawaan_vault/presentation/premium/maniro/maniro_welcome_screen.dart';
 import 'package:rawaan_vault/presentation/templates/food/food.v2.dart';
 
 void main() {
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: FoodV2Screen(),
+      home: const ManiroWelcomeScreen(),
     );
   }
 }
