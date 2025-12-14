@@ -79,56 +79,12 @@ class _ManiroCategoryScreenState extends State<ManiroCategoryScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildHeader(),
             _buildCategoryTabs(),
             Expanded(
               child: _buildProductGrid(),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeader() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: _backgroundGrey,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child:
-                  const Icon(Icons.arrow_back, color: _primaryBlack, size: 22),
-            ),
-          ),
-          const SizedBox(width: 16),
-          Text(
-            'Categories',
-            style: GoogleFonts.playfairDisplay(
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-              color: _primaryBlack,
-            ),
-          ),
-          const Spacer(),
-          Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(
-              color: _backgroundGrey,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child:
-                const Icon(Icons.filter_list, color: _primaryBlack, size: 22),
-          ),
-        ],
       ),
     );
   }

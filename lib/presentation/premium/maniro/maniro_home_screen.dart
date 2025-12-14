@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_category_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_product_detail_screen.dart';
+import 'package:rawaan_vault/presentation/premium/maniro/maniro_profile_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_search_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_cart_screen.dart';
 
@@ -52,6 +54,16 @@ class _ManiroHomeScreenState extends State<ManiroHomeScreen> {
       imageUrl:
           'https://images.unsplash.com/photo-1521369909029-2afed882baee?w=400',
     ),
+    PopularProduct(
+      name: 'LuxeLoom Tote',
+      imageUrl:
+          'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400',
+    ),
+    PopularProduct(
+      name: 'Busket Hat',
+      imageUrl:
+          'https://images.unsplash.com/photo-1521369909029-2afed882baee?w=400',
+    ),
   ];
 
   final List<Product> _products = [
@@ -87,36 +99,82 @@ class _ManiroHomeScreenState extends State<ManiroHomeScreen> {
       imageUrl:
           'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
     ),
+    Product(
+      name: 'Vintage Denim',
+      price: 189.00,
+      rating: 4.8,
+      reviews: 3421,
+      imageUrl:
+          'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400',
+    ),
+    Product(
+      name: 'Urban Blazer',
+      price: 299.00,
+      rating: 4.7,
+      reviews: 2891,
+      imageUrl:
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Column(children: [
             _buildHeader(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildPopularSection(),
-                    const SizedBox(height: 24),
-                    _buildCategoryTabs(),
-                    const SizedBox(height: 20),
-                    _buildProductGrid(),
-                    const SizedBox(height: 100),
-                  ],
-                ),
-              ),
+            _selectedNavIndex == 0
+                ? Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildPopularSection(),
+                          const SizedBox(height: 24),
+                          _buildCategoryTabs(),
+                          const SizedBox(height: 20),
+                          _buildProductGrid(),
+                          const SizedBox(height: 100),
+                        ],
+                      ),
+                    ),
+                  )
+                : _selectedNavIndex == 1
+                    ? Expanded(child: ManiroCategoryScreen())
+                    : Expanded(child: ManiroProfileScreen()),
+          ]),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedNavIndex,
+          onTap: (index) {
+            setState(() {
+              _selectedNavIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: _primaryBlack,
+          unselectedItemColor: _textGrey,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.house),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              // layerGroup looks like a stack of categories
+              icon: Icon(FontAwesomeIcons.layerGroup),
+              label: 'Category',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.user),
+              label: 'Profile',
             ),
           ],
-        ),
-      ),
-      bottomNavigationBar: _buildBottomNav(),
-    );
+        ));
   }
 
   Widget _buildHeader() {
@@ -208,34 +266,6 @@ class _ManiroHomeScreenState extends State<ManiroHomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Popular Product',
-                style: GoogleFonts.inter(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: _primaryBlack,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Text(
-                  'See More',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: _textGrey,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 16),
         SizedBox(
           height: 120,
           child: ListView.builder(
@@ -267,7 +297,7 @@ class _ManiroHomeScreenState extends State<ManiroHomeScreen> {
               child: Text(
                 product.name,
                 style: GoogleFonts.inter(
-                  fontSize: 14,
+                  fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: _primaryBlack,
                 ),
@@ -275,8 +305,9 @@ class _ManiroHomeScreenState extends State<ManiroHomeScreen> {
             ),
           ),
           ClipRRect(
-            borderRadius:
-                const BorderRadius.horizontal(right: Radius.circular(16)),
+            borderRadius: const BorderRadius.horizontal(
+              right: Radius.circular(16),
+            ),
             child: Image.network(
               product.imageUrl,
               width: 70,
@@ -500,8 +531,12 @@ class _ManiroHomeScreenState extends State<ManiroHomeScreen> {
   }
 
   Widget _buildNavItem(
-      int index, IconData icon, IconData activeIcon, String label,
-      {VoidCallback? onTap}) {
+    int index,
+    IconData icon,
+    IconData activeIcon,
+    String label, {
+    VoidCallback? onTap,
+  }) {
     final isSelected = _selectedNavIndex == index;
     return GestureDetector(
       onTap: onTap ?? () => setState(() => _selectedNavIndex = index),
