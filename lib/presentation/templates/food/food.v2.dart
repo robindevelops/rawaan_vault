@@ -67,23 +67,29 @@ class _FoodV2ScreenState extends State<FoodV2Screen> {
         children: [
           // Decorative Yellow Blobs
           Positioned(
-              top: -50,
-              left: -50,
-              child: Container(
-                  width: 150,
-                  height: 150,
-                  decoration: BoxDecoration(
-                      color: _yellow.withOpacity(0.3),
-                      shape: BoxShape.circle))),
+            top: -50,
+            left: -50,
+            child: Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                color: _yellow.withOpacity(0.3),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
           Positioned(
-              bottom: -30,
-              right: -30,
-              child: Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                      color: _yellow.withOpacity(0.3),
-                      shape: BoxShape.circle))),
+            bottom: -30,
+            right: -30,
+            child: Container(
+              width: 120,
+              height: 120,
+              decoration: BoxDecoration(
+                color: _yellow.withOpacity(0.3),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
 
           SafeArea(
             child: SingleChildScrollView(
@@ -197,16 +203,18 @@ class _FoodV2ScreenState extends State<FoodV2Screen> {
                                       boxShadow: selected
                                           ? [
                                               BoxShadow(
-                                                  color:
-                                                      _yellow.withOpacity(0.4),
-                                                  blurRadius: 12,
-                                                  offset: const Offset(0, 4))
+                                                color: _yellow.withOpacity(0.4),
+                                                blurRadius: 12,
+                                                offset: const Offset(0, 4),
+                                              )
                                             ]
                                           : null,
                                     ),
-                                    child: Icon(_categories[i]['icon'],
-                                        color: selected ? Colors.white : _dark,
-                                        size: 24),
+                                    child: Icon(
+                                      _categories[i]['icon'],
+                                      color: selected ? Colors.white : _dark,
+                                      size: 24,
+                                    ),
                                   ),
                                   const SizedBox(height: 8),
                                   Text(_categories[i]['label'],
@@ -252,11 +260,29 @@ class _FoodV2ScreenState extends State<FoodV2Screen> {
             ),
           ),
           // Bottom Nav
-          Positioned(
-            bottom: 30,
-            left: 20,
-            right: 20,
-            child: _buildBottomNav(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: _yellow,
+        unselectedItemColor: _grey,
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
       ),

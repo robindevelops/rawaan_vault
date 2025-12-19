@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OnBoardingV2Screen extends StatefulWidget {
@@ -12,218 +13,346 @@ class _OnBoardingV2ScreenState extends State<OnBoardingV2Screen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // Define Brand Colors
-  final Color _limeGreen = const Color(0xFFBFFF60);
-  final Color _forestGreen = Colors.green.shade900;
+  // Premium Color Palette
+  static const Color _primary = Color(0xFF6C63FF);
+  static const Color _primaryLight = Color(0xFF8B85FF);
+  static const Color _dark = Color(0xFF1A1A2E);
+  static const Color _textDark = Color(0xFF2D2D3A);
+  static const Color _textLight = Color(0xFF9E9EA7);
+  static const Color _bg = Color(0xFFFFFFFF);
 
-  // Dummy Data for the slider
-  final List<Map<String, String>> _onboardingData = [
+  final List<Map<String, dynamic>> _pages = [
     {
-      "title": "Team Up For Success",
-      "subtitle":
-          "Great things in business are never done by one person. They're done by a team of people.",
-      "image":
-          "https://img.freepik.com/free-vector/flat-creativity-concept-illustration_52683-64279.jpg",
+      'icon': Icons.rocket_launch_rounded,
+      'title': 'Launch Your Ideas',
+      'subtitle':
+          'Transform your creative vision into reality with powerful tools designed for modern creators.',
+      'color': Color(0xFF6C63FF),
     },
     {
-      "title": "Work Smarter",
-      "subtitle":
-          "Leverage tools that help you organize your workflow and boost productivity effortlessly.",
-      "image":
-          "https://img.freepik.com/free-vector/business-team-brainstorming-discussing-startup-project_74855-6909.jpg",
+      'icon': Icons.people_alt_rounded,
+      'title': 'Collaborate Seamlessly',
+      'subtitle':
+          'Work together with your team in real-time. Share, edit, and create without boundaries.',
+      'color': Color(0xFF00BFA6),
     },
     {
-      "title": "Achieve Goals",
-      "subtitle":
-          "Set milestones, track progress, and celebrate victories with your entire organization.",
-      "image":
-          "https://img.freepik.com/free-vector/business-mission-concept-illustration_114360-7295.jpg",
+      'icon': Icons.trending_up_rounded,
+      'title': 'Achieve Excellence',
+      'subtitle':
+          'Track your progress, hit milestones, and celebrate every success on your journey.',
+      'color': Color(0xFFFF6B6B),
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // 1. Top Bar (Logo + Skip)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.bolt_rounded, color: _forestGreen, size: 24),
-                      const SizedBox(width: 8),
-                      Text(
-                        "Rawwaan",
-                        style: GoogleFonts.aBeeZee(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: _forestGreen,
-                        ),
-                      ),
-                    ],
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Handle Skip
-                    },
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.grey,
-                    ),
-                    child: Text(
-                      "Skip",
-                      style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
-                    ),
-                  )
-                ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        backgroundColor: _bg,
+        body: SafeArea(
+          child: Column(
+            children: [
+              _buildHeader(),
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (index) =>
+                      setState(() => _currentPage = index),
+                  itemCount: _pages.length,
+                  itemBuilder: (context, index) => _buildPage(_pages[index]),
+                ),
               ),
-            ),
-
-            // 2. Main Slider Content
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                onPageChanged: (value) => setState(() => _currentPage = value),
-                itemCount: _onboardingData.length,
-                itemBuilder: (context, index) {
-                  return _buildPageContent(
-                    data: _onboardingData[index],
-                  );
-                },
-              ),
-            ),
-
-            // 3. Bottom Section (Indicators + Button)
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  // Page Indicators
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      _onboardingData.length,
-                      (index) => AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        height: 8,
-                        width: _currentPage == index ? 24 : 8,
-                        decoration: BoxDecoration(
-                          color: _currentPage == index
-                              ? _forestGreen
-                              : Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
-
-                  // Primary Action Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_currentPage < _onboardingData.length - 1) {
-                          _pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        } else {
-                          // Navigate to Login
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _limeGreen,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      child: Text(
-                        _currentPage == _onboardingData.length - 1
-                            ? "Get Started"
-                            : "Next",
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: _forestGreen,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+              _buildBottomSection(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildPageContent({required Map<String, String> data}) {
+  Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Logo
+          Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  gradient:
+                      const LinearGradient(colors: [_primary, _primaryLight]),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(Icons.auto_awesome,
+                    color: Colors.white, size: 20),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                'Rawaan',
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: _textDark,
+                ),
+              ),
+            ],
+          ),
+          // Skip button
+          TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+            ),
+            child: Text(
+              'Skip',
+              style: GoogleFonts.inter(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: _textLight,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPage(Map<String, dynamic> data) {
+    final Color pageColor = data['color'];
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Image Container with subtle decoration
+          // Illustration container
           Container(
-            height: 300,
-            width: double.infinity,
+            width: 280,
+            height: 280,
             decoration: BoxDecoration(
-              color: const Color(0xFFF5F5FA),
-              borderRadius: BorderRadius.circular(24),
+              color: pageColor.withOpacity(0.08),
+              shape: BoxShape.circle,
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Image.network(
-                data["image"]!,
-                fit: BoxFit.contain,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: _forestGreen,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Outer ring
+                Container(
+                  width: 220,
+                  height: 220,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        color: pageColor.withOpacity(0.15), width: 2),
+                  ),
+                ),
+                // Inner ring
+                Container(
+                  width: 160,
+                  height: 160,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border:
+                        Border.all(color: pageColor.withOpacity(0.2), width: 2),
+                  ),
+                ),
+                // Center icon container
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [pageColor, pageColor.withOpacity(0.8)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
-                  );
-                },
-                errorBuilder: (context, error, stack) => Icon(
-                  Icons.image_not_supported_outlined,
-                  color: Colors.grey.shade400,
-                  size: 50,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: pageColor.withOpacity(0.4),
+                        blurRadius: 30,
+                        offset: const Offset(0, 15),
+                      ),
+                    ],
+                  ),
+                  child: Icon(data['icon'], color: Colors.white, size: 48),
+                ),
+                // Decorative dots
+                Positioned(top: 40, right: 50, child: _dot(8, pageColor)),
+                Positioned(bottom: 60, left: 40, child: _dot(12, pageColor)),
+                Positioned(top: 80, left: 30, child: _dot(6, pageColor)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 56),
+          // Title
+          Text(
+            data['title'],
+            textAlign: TextAlign.center,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 28,
+              fontWeight: FontWeight.w800,
+              color: _textDark,
+              height: 1.2,
+            ),
+          ),
+          const SizedBox(height: 16),
+          // Subtitle
+          Text(
+            data['subtitle'],
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: _textLight,
+              height: 1.6,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _dot(double size, Color color) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.6),
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+
+  Widget _buildBottomSection() {
+    final Color currentColor = _pages[_currentPage]['color'];
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(32, 24, 32, 32),
+      child: Column(
+        children: [
+          // Page indicators
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              _pages.length,
+              (index) => AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: _currentPage == index ? 28 : 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: _currentPage == index
+                      ? currentColor
+                      : const Color(0xFFE0E0E0),
+                  borderRadius: BorderRadius.circular(4),
                 ),
               ),
             ),
           ),
           const SizedBox(height: 40),
-
-          // Text Content
-          Text(
-            data["title"]!,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.aBeeZee(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-              height: 1.2,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            data["subtitle"]!,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              color: Colors.grey.shade600,
-              height: 1.5,
-            ),
+          // Action buttons
+          Row(
+            children: [
+              // Back button (only show after first page)
+              if (_currentPage > 0)
+                Expanded(
+                  child: Container(
+                    height: 56,
+                    margin: const EdgeInsets.only(right: 12),
+                    child: OutlinedButton(
+                      onPressed: () {
+                        _pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: Colors.grey.shade300),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16)),
+                      ),
+                      child: Text(
+                        'Back',
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: _textDark,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              // Next/Get Started button
+              Expanded(
+                flex: _currentPage > 0 ? 1 : 1,
+                child: Container(
+                  height: 56,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [currentColor, currentColor.withOpacity(0.85)],
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: currentColor.withOpacity(0.4),
+                        blurRadius: 16,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: () {
+                        if (_currentPage < _pages.length - 1) {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        } else {
+                          // Navigate to main screen
+                        }
+                      },
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _currentPage == _pages.length - 1
+                                  ? 'Get Started'
+                                  : 'Continue',
+                              style: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Icon(
+                              _currentPage == _pages.length - 1
+                                  ? Icons.arrow_forward
+                                  : Icons.arrow_forward,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

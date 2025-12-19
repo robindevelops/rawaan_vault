@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// ════════════════════════════════════════════════════════════════════════════
@@ -43,42 +42,37 @@ class _AuthV19ScreenState extends State<AuthV19Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark.copyWith(
-        statusBarColor: Colors.transparent,
-      ),
-      child: Scaffold(
-        backgroundColor: _background,
-        body: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 48),
-                    _buildLogo(),
-                    const SizedBox(height: 48),
-                    _buildWelcomeText(),
-                    const SizedBox(height: 40),
-                    _buildEmailField(),
-                    const SizedBox(height: 16),
-                    _buildPasswordField(),
-                    const SizedBox(height: 12),
-                    _buildForgotPassword(),
-                    const SizedBox(height: 32),
-                    _buildLoginButton(),
-                    const SizedBox(height: 24),
-                    _buildDivider(),
-                    const SizedBox(height: 24),
-                    _buildSocialButtons(),
-                    const SizedBox(height: 32),
-                    _buildSignUpLink(),
-                    const SizedBox(height: 48),
-                  ],
-                ),
+    return Scaffold(
+      backgroundColor: _background,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 48),
+                  _buildLogo(),
+                  const SizedBox(height: 48),
+                  _buildWelcomeText(),
+                  const SizedBox(height: 40),
+                  _buildEmailField(),
+                  const SizedBox(height: 16),
+                  _buildPasswordField(),
+                  const SizedBox(height: 12),
+                  _buildForgotPassword(),
+                  const SizedBox(height: 32),
+                  _buildLoginButton(),
+                  const SizedBox(height: 24),
+                  _buildDivider(),
+                  const SizedBox(height: 24),
+                  _buildSocialButtons(),
+                  const SizedBox(height: 32),
+                  _buildSignUpLink(),
+                  const SizedBox(height: 48),
+                ],
               ),
             ),
           ),
