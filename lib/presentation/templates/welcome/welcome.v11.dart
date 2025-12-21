@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart'; // For custom fonts
 
 class WelcomeV11Screen extends StatefulWidget {
@@ -63,17 +64,13 @@ class _WelcomeV11ScreenState extends State<WelcomeV11Screen> {
                               color: Colors.green.withOpacity(0.25),
                               shape: BoxShape.circle,
                             ),
+                            child: Icon(
+                              FontAwesomeIcons.moneyBill1,
+                              color: _iconColor,
+                              size: 100,
+                            ),
                           ),
-                          // Main character illustration (using a placeholder network image)
-                          // In a real app, you'd use an SVG asset or a custom painter
-                          Image.network(
-                            'https://i.imgur.com/your-illustration-placeholder.png', // Replace with your illustration URL
-                            // For now, I'll use a placeholder that vaguely matches the style:
 
-                            fit: BoxFit.contain,
-                            width: 300,
-                            height: 300,
-                          ),
                           // Other small floating elements
                           Positioned(
                             left: 0,

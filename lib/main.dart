@@ -3,6 +3,7 @@ import 'package:rawaan_vault/presentation/premium/loza/loza_cart_screen.dart';
 import 'package:rawaan_vault/presentation/premium/loza/loza_welcome_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_home_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_welcome_screen.dart';
+import 'package:rawaan_vault/presentation/templates/subscription/subscription.v1.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v10.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v11.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v12.dart';
@@ -54,6 +55,24 @@ import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v6.dar
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v7.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v8.dart';
 import 'package:rawaan_vault/presentation/templates/onboarding/onboarding.v9.dart';
+import 'package:rawaan_vault/presentation/templates/subscription/subscription.v2.dart';
+import 'package:rawaan_vault/presentation/templates/subscription/subscription.v3.dart';
+import 'package:rawaan_vault/presentation/templates/subscription/subscription.v4.dart';
+import 'package:rawaan_vault/presentation/templates/subscription/subscription.v5.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v1.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v10.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v11.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v12.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v13.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v14.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v2.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v3.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v4.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v5.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v6.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v7.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v8.dart';
+import 'package:rawaan_vault/presentation/templates/welcome/welcome.v9.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,7 +89,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: OnBoardingV11Screen(),
+      home: SubscriptionV5Screen(),
     );
   }
 }
