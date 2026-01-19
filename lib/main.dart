@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:rawaan_vault/presentation/premium/brew/brew_auth_screen.dart';
 import 'package:rawaan_vault/presentation/premium/brew/brew_name_screen.dart';
 import 'package:rawaan_vault/presentation/premium/brew/brew_otp_screen.dart';
+import 'package:rawaan_vault/presentation/premium/foodpanda/foodpanda_splash.dart';
+import 'package:rawaan_vault/presentation/premium/foodpanda/foodpanda_home.dart';
+import 'package:rawaan_vault/presentation/premium/foodpanda/foodpanda_restaurant_list.dart';
+import 'package:rawaan_vault/presentation/premium/foodpanda/foodpanda_menu.dart';
+import 'package:rawaan_vault/presentation/premium/foodpanda/foodpanda_cart.dart';
+import 'package:rawaan_vault/presentation/premium/foodpanda/foodpanda_search.dart';
 import 'package:rawaan_vault/presentation/premium/loza/loza_cart_screen.dart';
 import 'package:rawaan_vault/presentation/premium/loza/loza_welcome_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_home_screen.dart';
@@ -92,7 +98,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: BrewAuthScreen(),
+      home: const FoodpandaHomeScreen(),
     );
   }
 }
