@@ -36,7 +36,7 @@ class _FoodpandaSearchScreenState extends State<FoodpandaSearchScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         title: Container(
           height: 45,
           decoration: BoxDecoration(

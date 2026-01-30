@@ -12,6 +12,9 @@ import 'package:rawaan_vault/presentation/premium/loza/loza_cart_screen.dart';
 import 'package:rawaan_vault/presentation/premium/loza/loza_welcome_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_home_screen.dart';
 import 'package:rawaan_vault/presentation/premium/maniro/maniro_welcome_screen.dart';
+import 'package:rawaan_vault/presentation/templates/food/food.v1.dart';
+import 'package:rawaan_vault/presentation/templates/food/food.v3.dart';
+import 'package:rawaan_vault/presentation/templates/food/food.v4.dart';
 import 'package:rawaan_vault/presentation/templates/subscription/subscription.v1.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v10.dart';
 import 'package:rawaan_vault/presentation/templates/auth/auth.v11.dart';
@@ -98,7 +101,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      home: const FoodpandaHomeScreen(),
+      home: const FoodV4Screen(),
     );
   }
 }

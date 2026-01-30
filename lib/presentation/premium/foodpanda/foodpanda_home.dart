@@ -163,6 +163,12 @@ class _FoodpandaHomeContentState extends State<FoodpandaHomeContent> {
                     readOnly: true,
                     onTap: () {
                       // Handled by main navigation
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FoodpandaSearchScreen(),
+                        ),
+                      );
                     },
                   ),
                 ),
