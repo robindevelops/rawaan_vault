@@ -222,7 +222,7 @@ class FoodpandaSplashScreen extends StatelessWidget {
                   const Text(
                     'foodpanda',
                     style: TextStyle(
-                      fontSize: 52,
+                      fontSize: 35,
                       fontWeight: FontWeight.w900,
                       color: Colors.white,
                       letterSpacing: -2,
@@ -244,7 +244,7 @@ class FoodpandaSplashScreen extends StatelessWidget {
                     child: const Text(
                       'Order food you love',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 13,
                         color: Colors.white,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.5,
